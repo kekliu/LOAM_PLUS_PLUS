@@ -1,4 +1,5 @@
 #include "initial_ex_rotation.h"
+#include <Eigen/src/Geometry/Quaternion.h>
 #include "utility.h"
 
 using namespace Eigen;
@@ -31,6 +32,9 @@ bool InitialEXRotation::CalibrationExRotation(Quaterniond delta_q_lidar, Quatern
     Quaterniond r2(Rc_g[i]);
 
     double angular_distance = 180 / M_PI * r1.angularDistance(r2);
+    double a1               = 180 / M_PI * r1.angularDistance(Quaterniond(1, 0, 0, 0));
+    double a2               = 180 / M_PI * r2.angularDistance(Quaterniond(1, 0, 0, 0));
+    std::cout << a1  << std::endl;
     ROS_DEBUG(
         "%d %f", i, angular_distance);
 
